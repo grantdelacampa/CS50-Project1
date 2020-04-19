@@ -1,0 +1,34 @@
+{% extends "form_layout.html" %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block body %}
+<!-- Reference: https://azmind.com/bootstrap-align-center/ -->
+<div class = "row h-100 justify-content-center align-items-center">
+  <div id = "form-back" class="col-10 col-md-8 col-lg-6 rounded">
+	<!-- Form -->
+    <form action="{{ url_for('login') }}" method="post">
+	  <h1 class="text-center">Bookworm</h1>
+	  <!-- Input fields -->
+	  <div class = "form-group">
+	    <label for="username">Username:</label>
+	    <input type = "text" class = "form-control username" id="username" name="username" placeholder="Username" aria-describedby = "userBlock" required>
+		{% if message == "user" %}
+		<small id = "userBlock" class = "form-text text-muted text-center">Username is incorrect or not registered</small>
+		{% endif %}
+      </div>
+    <div class = "form-group">
+	  <label for="password">Password:</label>
+      <input type = "password" class = "form-control password" id="password" name="password" placeholder="Password" aria-describedby = "passBlock" required>
+	  {% if message == "pass" %}
+	  <small id = "passBlock" class = "form-text text-muted text-center">Password is incorrect</small>
+	  {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary" aria-describedby = "btnHelpBlock">Sign in</button>
+    <small id="btnHelpBlock" class = "form-text text-muted text-center"> Don't have an account register <a href={{url_for('register')}}>here</a>.</small>
+    </form>
+  </div>
+</div>
+{% endblock %}

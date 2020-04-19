@@ -1,0 +1,20 @@
+{% extends "page_layout.html" %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block body %}
+<div class="row mt-2">
+	<div class = "col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">User Profile</h4>
+				<p class = "card-text">Username: {{data.username}}</p>
+				<p class = "card-text">Email: {{data.email}}</p>
+				<p class="card-text">Reviews: {{data.count}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

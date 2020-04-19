@@ -1,0 +1,33 @@
+{% extends "form_layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block body %}
+<!-- Reference: https://azmind.com/bootstrap-align-center/ -->
+<div class = "row h-100 justify-content-center align-items-center">
+  <div id = "form-back" class="col-10 col-md-8 col-lg-6 border">
+    <!-- Form -->
+	<form action="{{ url_for('register') }}" method = "post">
+	  <h1>Registration</h1>
+	  <p class = "description">This is a placeholder</p>
+	  <!-- Input fields -->
+	  <div class = "form-group">
+		<label for ="username">Username:</label>
+	    <input type = "text" class = "form-control username" id = "username" name="username" placeholder= "Username" required>
+	  </div>  
+	  <div class = "form-group">
+	    <label for="email">Email:</label>
+	    <input type = "email" class = "form-control email" id = "email" name="email" placeholder="Example@Email.com" required>
+	  </div>
+	  <div class = "form-group">
+	    <label for="password">Password:</label>
+	    <input type="password" class = "form-control password" id = "password" name="password" placeholder="Password" required>
+	  </div>
+	  <button type = "submit" class="btn btn-primary">Register</button>
+      <small id="btnHelpBlock" class = "form-text text-muted"> Already have an account login <a href={{ url_for("index") }}>here</a>.</small>
+	</form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "page_layout.html" %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block body %}
+<!-- Reference: https://azmind.com/bootstrap-align-center/ -->
+<div class = "row h-100 justify-content-center align-items-center">
+	<div id = "form-back" class="col-10 col-md-8 col-lg-6 rounded">
+		<!-- Form -->
+		<form action="{{ url_for('search')}}" method="post">
+			<h1>Search:</h1>
+			<div class = "form-group">
+				<label for="ISBN">ISBN:</label>
+				<input type="text" id="ISBN" name="ISBN" placeholder="0123456789">
+			</div>
+			<div class = "form-group">
+				<label for = "author">Author:</label>
+				<input type="text" id = "author" name = "author" placeholder= "John .T Author">
+			</div>
+			<div class = "form-group">
+				<label for="title">Title:</label>
+				<input type="text" id="title" name = "title" placeholder="Authors Example">
+			</div>
+			<div class = "form-group">
+				<button type="submit" class="btn btn-primary">Search</button>
+				<button type="reset" class="btn btn-primary">Reset</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

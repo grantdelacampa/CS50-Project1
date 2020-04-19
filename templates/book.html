@@ -1,0 +1,89 @@
+{% extends "page_layout.html" %}
+
+{% block title %}
+	Bookworm:{{book.title}}
+{% endblock %}
+
+{% block body %}
+<!--
+For this page I want to displace the book information at the top
+A review box if there is no review from the user
+and if there is a review then dispaly a message stating that there is a review
+
+then load all reviews from the database....
+-->
+<div class = "card">
+	<div class="card-header">
+		<h1>{{book.title}}</h1>
+	</div>
+	<div class="card-body">
+		<div class = "row">
+			<div class = "col-sm-4">
+				<h3>Book Info</h3>
+				<p class = "card-text">Author: {{book.author}}</p>
+				<p class = "card-text">ISBN: {{book.isbn}}</p>
+				<p class = "card-tezt">Publication year: {{book.publish_date}}</p>
+			</div>
+			<div class = "col-sm-4">
+				<h3>Bookworm reviews</h3>
+				<p class= "card-text">Reviews: {{stats.count }}</p>
+				<p class = "card-text">Average Review: {{stats.average}}</p>
+			</div>
+			<div class = "col-sm-4">
+				<h3>Goodreads reviews</h3>
+				<p class= "card-text">Reviews: placeholder</p>
+				<p class = "card-text">Average Review: placeholder</p>
+			</div>
+		</div>
+		{% if review is defined and review|length %}
+		<div class = "row-sm-12 text-center">
+			<h5>Notice: You have already reviewed this book.</h5>
+		</div>
+		{% else %}
+		<form action="{{url_for('book', book_id = book.id)}} " method = "post">
+			<div class = "form-row">
+				<div class = "col">
+					<h3>Leave a Review:</h3>
+					<div class="rating"> 
+						<input type="radio" name="rating" value="5" id="5">
+						<label for="5">5</label> 
+						<input type="radio" name="rating" value="4" id="4">
+						<label for="4">4</label> 
+						<input type="radio" name="rating" value="3" id="3">
+						<label for="3">3</label> 
+						<input type="radio" name="rating" value="2" id="2">
+						<label for="2">2</label> 
+						<input type="radio" name="rating" value="1" id="1">
+						<label for="1">1</label>
+					</div>
+					<button class = "btn btn-primary", type = "submit">Submit Review</button>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<label for="textarea_1">Example textarea</label>
+						<textarea class="form-control" id="textarea_1" name = "textarea_1" rows="3"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+		{% endif %}
+		<div class = "border-top container-fluid" style ="height: 150px, overflow-y: auto">
+			<ul class = "list-group list-group-flush overflow-y: auto">
+			{% if reviews is defined and reviews|length %}
+				{% for item in reviews %}
+				<li class = "list-group-item">
+					<p>Username: {{ item.username }}</p>
+					<p>Rating: {{ item.book_score }}</p>
+					<p>Review: {{ item.book_review }}</p>
+				</li>
+				{% endfor %}
+			{% else %}
+				<li><h4>There are no bookworm reviews for this book yet!</h4></li>
+			{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
